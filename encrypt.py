@@ -1,6 +1,7 @@
 from secrets import token_bytes
 from Cryptodome.Cipher import AES
 
+
 def encrypt(string):
     plaintext = string.encode('utf-8')
     while len(plaintext) % 16 != 0:
@@ -9,9 +10,13 @@ def encrypt(string):
     aes_cipher = AES.new(aes_key, AES.MODE_CBC)
     ciphertext = aes_cipher.encrypt(plaintext)
     cipher_material = {
-        'key': aes_key.hex(),
         'iv': aes_cipher.iv.hex(),
         'ciphertext': ciphertext.hex()
     }
 
-    return cipher_material
+    cipher_key = aes_key.hex()
+
+    print(f"Cipher key: {cipher_key}")
+
+    with open("plaintext.enc", "w") as f:
+        f.write(str(cipher_material))

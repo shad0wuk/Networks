@@ -1,13 +1,16 @@
 from encrypt import encrypt
 from decrypt import decrypt
 
-def main():
-    plaintext = input("Enter a string to encrypt: ")
-    cipher_material = encrypt(plaintext)
-    print(f"Cipher material: {cipher_material}")
 
-    decrypted_text = decrypt(cipher_material)
-    print(f"Plaintext: {decrypted_text}")
+def main():
+    with open("plaintext.txt", "r") as f:
+        plaintext = f.read()
+    encrypt(plaintext)
+    # print(f"Cipher material: {cipher_material}")
+
+    decrypt()
+    print("Decryption successful")
+
 
 if __name__ == "__main__":
     main()
