@@ -12,10 +12,11 @@ def decrypt():
                 cipher_key = input(
                     f"Enter cipher key (you have {count} tries left): ")
                 try:
-                    aes_cipher = AES.new(bytes.fromhex(cipher_key), AES.MODE_CBC, 
-                                    iv=bytes.fromhex(cipher_material['iv']))
-                    decrypted = aes_cipher.decrypt(bytes.fromhex(cipher_material['ciphertext']))
-                
+                    aes_cipher = AES.new(bytes.fromhex(cipher_key), AES.MODE_CBC,
+                                         iv=bytes.fromhex(cipher_material['iv']))
+                    decrypted = aes_cipher.decrypt(
+                        bytes.fromhex(cipher_material['ciphertext']))
+
                     while decrypted[-1] == 0:
                         decrypted = decrypted[:-1]
                 except ValueError:
@@ -25,6 +26,6 @@ def decrypt():
             else:
                 print("Too many failed attempts")
                 exit()
-   
+
     with open("plaintext.dec", "w") as f:
         f.write(str(decrypted.decode()))
